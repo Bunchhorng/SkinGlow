@@ -1,17 +1,17 @@
-import React from 'react'
-import { 
-  FaEnvelope, 
-  FaPhoneAlt, 
+import React from "react";
+import {
+  FaEnvelope,
+  FaPhoneAlt,
   FaMapMarkerAlt,
   FaLeaf,
   FaClock,
-  FaPaperPlane
-} from 'react-icons/fa'
-import { GiButterflyFlower } from 'react-icons/gi'
+  FaPaperPlane,
+} from "react-icons/fa";
+import { GiButterflyFlower } from "react-icons/gi";
 
 function Contact() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-white py-12">
       <div className="max-w-6xl mx-auto px-6 text-center mb-16">
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 mb-4 font-medium">
           <GiButterflyFlower className="mr-2" />
@@ -21,13 +21,13 @@ function Contact() {
           Contact Us
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          We'd love to hear from you! Whether you have questions about our products or need skincare advice, we're here to help.
+          We'd love to hear from you! Whether you have questions about our
+          products or need skincare advice, we're here to help.
         </p>
       </div>
 
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12">
-
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
@@ -35,13 +35,29 @@ function Contact() {
                 <FaLeaf className="text-emerald-500" />
                 Let's Connect
               </h2>
-              
+
               <div className="space-y-6">
                 {[
-                  {icon: FaMapMarkerAlt, title: "Our Location", info: "123 Beauty Street\nPhnom Penh, Cambodia"},
-                  {icon: FaPhoneAlt, title: "Phone Number", info: "+855 12 345 678"},
-                  {icon: FaEnvelope, title: "Email Address", info: "chhorng@gmail.com"},
-                  {icon: FaClock, title: "Business Hours", info: "Mon - Fri: 9AM - 6PM\nSat: 10AM - 4PM"},
+                  {
+                    icon: FaMapMarkerAlt,
+                    title: "Our Location",
+                    info: "123 Beauty Street\nPhnom Penh, Cambodia",
+                  },
+                  {
+                    icon: FaPhoneAlt,
+                    title: "Phone Number",
+                    info: "+855 12 345 678",
+                  },
+                  {
+                    icon: FaEnvelope,
+                    title: "Email Address",
+                    info: "Malen@gmail.com",
+                  },
+                  {
+                    icon: FaClock,
+                    title: "Business Hours",
+                    info: "Mon - Fri: 9AM - 6PM\nSat: 10AM - 4PM",
+                  },
                 ].map((item, index) => (
                   <div
                     key={index}
@@ -51,8 +67,12 @@ function Contact() {
                       <item.icon className="text-white text-lg" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">{item.title}</h3>
-                      <p className="text-gray-600 whitespace-pre-line">{item.info}</p>
+                      <h3 className="font-semibold text-gray-800 mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 whitespace-pre-line">
+                        {item.info}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -61,7 +81,9 @@ function Contact() {
 
             {/* Map Section */}
             <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Find Us Here</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                Find Us Here
+              </h3>
               <div className="rounded-xl overflow-hidden border border-gray-200">
                 <iframe
                   title="store-location"
@@ -79,14 +101,18 @@ function Contact() {
 
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Send us a Message</h2>
-            <p className="text-gray-600 mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Send us a Message
+            </h2>
+            <p className="text-gray-600 mb-8">
+              Fill out the form below and we'll get back to you within 24 hours.
+            </p>
 
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    First Name *
+                    First Name
                   </label>
                   <input
                     type="text"
@@ -97,7 +123,7 @@ function Contact() {
                 </div>
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Last Name *
+                    Last Name
                   </label>
                   <input
                     type="text"
@@ -110,13 +136,13 @@ function Contact() {
 
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  Email Address *
+                  Email Address
                 </label>
                 <input
                   type="email"
                   required
                   className="w-full border border-gray-200 rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-gray-50 transition-all duration-300"
-                  placeholder="your.email@example.com"
+                  placeholder="malen@gmail.com"
                 />
               </div>
 
@@ -136,7 +162,7 @@ function Contact() {
 
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  Message *
+                  Message
                 </label>
                 <textarea
                   rows="6"
@@ -158,7 +184,7 @@ function Contact() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

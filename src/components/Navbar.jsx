@@ -48,7 +48,10 @@ function Navbar() {
           </ul>
 
           {/* Cart Icon */}
-          <Link to="/cart" className="relative ml-3 p-2 rounded-full hover:bg-amber-50 transition-all duration-300 group">
+          <Link
+            to="/cart"
+            className="relative ml-3 p-2 rounded-full hover:bg-amber-50 transition-all duration-300 group"
+          >
             <IoCartOutline className="h-6 w-6 text-slate-700 group-hover:text-emerald-500 transition-colors" />
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-xs font-semibold px-1.5 py-0.5 rounded-full min-w-5 text-center">
