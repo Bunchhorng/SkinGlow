@@ -1,16 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Image1 from '../assets/heroImage2.png';
 function HeroPage() {
   return (
     <section className="relative h-96 sm:h-[500px] md:h-[600px] w-full overflow-hidden rounded-t-2xl">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80')",
-        }}
-      ></div>
+      >
+        <img src={Image1} className="w-full h-full object-cover" alt="" />
+      </div>
       <div className="absolute inset-0 bg-black/20"></div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">
