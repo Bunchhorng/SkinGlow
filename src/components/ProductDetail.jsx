@@ -10,7 +10,9 @@ function ProductDetail({ products }) {
   const { addToCart } = useCart();
 
   if (!product) {
-    return <h2 className="text-center text-red-500 mt-10">Product not found</h2>;
+    return (
+      <h2 className="text-center text-red-500 mt-10">Product not found</h2>
+    );
   }
 
   const handleAddToCart = () => {
@@ -50,9 +52,15 @@ function ProductDetail({ products }) {
 
       {/* Right: Info */}
       <div className="flex-1 flex flex-col justify-center p-4 lg:p-0">
-        <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">{product.name}</h1>
-        <p className="text-gray-600 text-lg mb-6 leading-relaxed">{product.description}</p>
-        <p className="text-emerald-600 text-3xl lg:text-4xl font-bold mb-8">${product.price.toFixed(2)}</p>
+        <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">
+          {product.name}
+        </h1>
+        <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+          {product.description}
+        </p>
+        <p className="text-emerald-600 text-3xl lg:text-4xl font-bold mb-8">
+          ${product.price.toFixed(2)}
+        </p>
 
         <div className="flex flex-wrap items-center gap-4">
           <button

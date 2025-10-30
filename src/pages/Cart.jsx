@@ -1,94 +1,115 @@
 import React from "react";
 import { useCart } from "../context/ContextCart";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Cart() {
-  const { cartItems, addToCart, removeFromCart, buyCart } = useCart();
+  const { cartItems, addToCart, removeFromCart, clearCart, checkoutCart } = useCart();
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
 
-  if (cartItems.length === 0) {
-    return <h2 className="text-center text-gray-500 text-xl py-50 text-[50px]">Your cart is empty</h2>;
-  }
-
-  const handleBuy = () => {
-    buyCart();
+  const handleCheckout = () => {
+  const result = checkoutCart();
+  if (result.success) {
     Swal.fire({
-    title: "Purchase Successful!",
-    text: "Thank you for your order!",
-    icon: "success",
-    confirmButtonColor: "#10B981",
-    timer: 2000,
-    timerProgressBar: true,
-    showClass: {
-      popup: 'animate__animated animate__fadeInDown'
-    },
-    hideClass: {
-      popup: 'animate__animated animate__fadeOutUp'
-    }
-  });
-  };
-
+      title: "Purchase Successful!",
+      text: `Total: $${result.orderData.totalAmount}\nThank you for your order!`,
+      icon: "success",
+      confirmButtonColor: "#10B981",
+      timer: 2500,
+      timerProgressBar: true,
+    });
+  } else {
+    Swal.fire({
+      title: "Cart is Empty",
+      text: "Please add some products first!",
+      icon: "warning",
+      confirmButtonColor: "#F59E0B",
+    });
+  }
+};
   return (
-    <div className="max-w-4xl mx-auto my-16 px-6">
-      <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">Your Cart</h1>
+    <div className="max-w-5xl mx-auto px-6 my-25">
+      <h1 className="text-3xl font-bold text-center mb-10 text-slate-800">
+        Your Cart
+      </h1>
 
-      <div className="flex flex-col gap-6">
-        {cartItems.map((item) => (
-          <div
-            key={item.id + item.selectedImage} // unique for same product with different images
-            className="flex justify-between items-center p-4 border rounded-xl shadow-sm hover:shadow-md transition-shadow"
+      {cartItems.length === 0 ? (
+        <div className="text-center">
+          <p className="text-lg text-gray-600 mb-6">Your cart is empty.</p>
+          <Link
+            to="/products"
+            className="inline-block bg-emerald-500 text-white font-medium px-6 py-3 rounded-full hover:bg-emerald-600 transition-all"
           >
-            {/* Image + Info */}
-            <div className="flex items-center gap-4">
-              <img
-                src={item.selectedImage || item.image}
-                alt={item.name}
-                className="w-20 h-20 object-cover rounded-lg"
-              />
-              <div>
-                <p className="font-semibold text-gray-800">{item.name}</p>
-                <p className="text-emerald-600 font-bold">
-                  ${(item.price * item.qty).toFixed(2)}
-                </p>
+            Continue Shopping
+          </Link>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {cartItems.map((item, index) => (
+            <div
+              key={`${item.id}-${index}`}
+              className="flex flex-col sm:flex-row items-center justify-between gap-6 bg-white shadow-md rounded-2xl p-5"
+            >
+              <div className="flex items-center gap-4 w-full sm:w-auto">
+                <img
+                  src={item.selectedImage || item.image}
+                  alt={item.name}
+                  className="w-28 h-28 object-cover rounded-xl border"
+                />
+                <div>
+                  <h3 className="font-semibold text-lg text-slate-800">
+                    {item.name}
+                  </h3>
+                  <p className="text-slate-600">${item.price.toFixed(2)}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => removeFromCart(item.id, item.selectedImage)}
+                  className="bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-600 transition-colors"
+                >
+                  -
+                </button>
+                <span className="font-semibold text-slate-800">{item.qty}</span>
+                <button
+                  onClick={() =>
+                    addToCart({
+                      ...item,
+                      selectedImage: item.selectedImage,
+                    })
+                  }
+                  className="bg-emerald-500 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-emerald-600 transition-colors"
+                >
+                  +
+                </button>
               </div>
             </div>
+          ))}
 
-            {/* Quantity Controls */}
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row justify-between items-center mt-10 border-t pt-6">
+            <h2 className="text-2xl font-bold text-slate-800">
+              Total: ${totalPrice.toFixed(2)}
+            </h2>
+            <div className="flex gap-4 mt-4 sm:mt-0">
               <button
-                onClick={() => removeFromCart(item.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 font-semibold transition-colors"
+                onClick={clearCart}
+                className="px-6 py-3 bg-gray-200 rounded-full hover:bg-gray-300 transition-all font-medium"
               >
-                -
+                Clear Cart
               </button>
-              <span className="px-2 font-semibold text-gray-800">{item.qty}</span>
-              <button
-                onClick={() => addToCart({ ...item, image: item.selectedImage })}
-                className="bg-emerald-500 text-white px-3 py-1 rounded-full hover:bg-emerald-600 font-semibold transition-colors"
-              >
-                +
+              <button onClick={handleCheckout}
+               className="px-6 py-3 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-all font-medium">
+                Checkout
               </button>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Total & Buy */}
-      <div className="mt-8 flex justify-between items-center p-4 bg-amber-50 rounded-xl shadow-sm">
-        <p className="text-lg font-semibold text-gray-800">
-          Total: <span className="text-emerald-600">${totalPrice.toFixed(2)}</span>
-        </p>
-        <button
-          onClick={handleBuy}
-          className="bg-emerald-500 text-white px-6 py-2 rounded-full hover:bg-emerald-600 font-bold transition-transform hover:scale-105"
-        >
-          Buy Now
-        </button>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
