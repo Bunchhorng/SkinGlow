@@ -17,7 +17,7 @@ import { GiButterflyFlower } from "react-icons/gi";
 
 function Footer() {
   return (
-    <footer className="bg-linear-to-b from-slate-800 to-slate-900 text-white">
+    <footer className="bg-gradient-to-b from-slate-800 to-slate-900 text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -37,7 +37,10 @@ function Footer() {
               finest ingredients with scientific innovation to bring you
               radiant, healthy skin.
             </p>
-            <div className="flex space-x-4">
+            <div
+              className="flex space-x-4"
+              aria-label="Social media links"
+            >
               {[
                 { icon: FaFacebookF, color: "hover:text-blue-400" },
                 { icon: FaInstagram, color: "hover:text-pink-400" },
@@ -47,6 +50,7 @@ function Footer() {
                 <a
                   key={index}
                   href="#"
+                  aria-label={SocialIcon.icon.name}
                   className={`bg-slate-700 p-3 rounded-full transition-all duration-300 transform hover:scale-110 ${SocialIcon.color} hover:bg-slate-600`}
                 >
                   <SocialIcon.icon className="text-lg" />
@@ -90,20 +94,20 @@ function Footer() {
             </h3>
             <ul className="space-y-3">
               {[
-                "Contact Us",
-                "Shipping Info",
-                "Returns & Exchanges",
-                "FAQ",
-                "Privacy Policy",
+                { name: "Contact Us", path: "/contact" },
+                { name: "Shipping Info", path: "/shipping" },
+                { name: "Returns & Exchanges", path: "/returns" },
+                { name: "FAQ", path: "/faq" },
+                { name: "Privacy Policy", path: "/privacy" },
               ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
                     className="text-slate-300 hover:text-amber-400 transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <span className="w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -133,17 +137,16 @@ function Footer() {
                 <p className="text-slate-300">hello@skinglow.com</p>
               </div>
             </div>
-
-            {/* Newsletter Signup */}
+          
             <div className="mt-6">
               <h4 className="text-sm font-semibold mb-3 text-slate-200">
                 Newsletter
               </h4>
-              <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex flex-col sm:flex-row sm:flex-nowrap flex-wrap gap-2 w-full">
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="flex-1 px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="flex-1 min-w-0 px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
                 <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg transition-colors duration-300 font-medium whitespace-nowrap">
                   Subscribe
